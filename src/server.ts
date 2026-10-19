@@ -2,6 +2,7 @@ import type { Server } from "http";
 import colors from "colors";
 import app from "./app";
 import config from "./config";
+import prisma from "./config/prisma";
 
 let server: Server | undefined;
 
@@ -13,6 +14,14 @@ async function main() {
       ),
     );
   });
+  prisma
+    .$connect()
+    .then(() => {
+      console.log("🌿 Connected to MongoDB successfully!");
+    })
+    .catch((err) => {
+      console.error("⚠️  Database connection issue:", err.message);
+    });
 }
 
 main().catch((err) => {
