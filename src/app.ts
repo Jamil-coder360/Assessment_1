@@ -1,6 +1,8 @@
 import cookieParser from "cookie-parser";
-import express, { Application } from "express";
+import express, { request, response, type Application } from "express";
 import cors from "cors";
+import router from "./routes/routes";
+import { globalErrorHandler } from "./middleware/globalerrorhandler";
 
 const app: Application = express();
 
@@ -17,8 +19,12 @@ app.use(
   }),
 );
 
-app.get("/", (req, res) => {
+app.get("/", (req = request, res = response) => {
   res.send("Server is running");
 });
+
+app.use("/api/v1", router);
+
+app.use(globalErrorHandler);
 
 export default app;

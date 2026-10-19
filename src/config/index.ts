@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 export default {
-  port: process.env.PORT || 5000,
+  port: process.env.PORT || 5002,
   ip: process.env.IP || "0.0.0.0",
   node_env: process.env.NODE_ENV || "production",
 };
