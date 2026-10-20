@@ -17,10 +17,10 @@ async function main() {
   prisma
     .$connect()
     .then(() => {
-      console.log("🌿 Connected to MongoDB successfully!");
+      console.log("Connected to MongoDB successfully!");
     })
     .catch((err) => {
-      console.error("⚠️  Database connection issue:", err.message);
+      console.error(" Database connection issue:", err.message);
     });
 }
 

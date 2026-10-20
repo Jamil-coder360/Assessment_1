@@ -5,15 +5,15 @@ import { Prisma } from "@prisma/client";
 import prisma from "../../config/prisma";
 
 const createUser = async (payload: Prisma.UserCreateInput) => {
-  const createUser = prisma.user.create({
+  const createdUser = await prisma.user.create({
     data: payload,
   });
 
-  if (!createUser) {
+  if (!createdUser) {
     throw new AppError(httpStatus.BAD_GATEWAY, "user creation failed!");
   }
 
-  return createUser;
+  return createdUser;
 };
 
 const getUser = async () => {

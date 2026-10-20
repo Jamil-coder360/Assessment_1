@@ -1,5 +1,5 @@
 import cookieParser from "cookie-parser";
-import express, { request, response, type Application } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import router from "./routes/routes";
 import { globalErrorHandler } from "./middleware/globalerrorhandler";
@@ -19,7 +19,7 @@ app.use(
   }),
 );
 
-app.get("/", (req = request, res = response) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Server is running");
 });
 

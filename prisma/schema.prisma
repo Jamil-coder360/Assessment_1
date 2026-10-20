@@ -14,23 +14,36 @@ model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   profile   String?
   status    USER_STATUS @default(active)
-  password String
+  password  String
   email     String   @unique
   name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  crud      Crud?
 }
 
-model Crud{
-   id String @id @default(auto()) @map("_id") @db.ObjectId 
-  userId String @unique
-  title String 
+model Crud {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId 
+  userId      String    @unique @db.ObjectId
+  title       String 
   description String?
-  status TASK_TYPE @default(pending)
+  status      TASK_TYPE @default(pending)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
+  user        User      @relation(fields: [userId], references: [id])
+}
 
-  user User @relation(fields: [userId], references: [id])
+enum USER_STATUS {
+  active
+  inactive
+  blocked
+}
+
+enum TASK_TYPE {
+  pending
+  in_progress
+  completed
 }
